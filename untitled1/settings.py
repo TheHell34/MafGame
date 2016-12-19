@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MafGame',
+    'Building',
+    'Item',
+    'Player',
+    'Type',
+    'Unit',
 ]
 
 MIDDLEWARE = [

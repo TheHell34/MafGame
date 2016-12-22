@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.conf import settings
+
 from Player.models import player
 from Activities.models import activity
 

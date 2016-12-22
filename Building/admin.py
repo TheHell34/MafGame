@@ -1,6 +1,6 @@
 from django.contrib import admin
-from Building.models import Building
+from Building.models import building
 
 # Register your models here.
 
-admin.site.register(Building)
+# admin.site.register(building)

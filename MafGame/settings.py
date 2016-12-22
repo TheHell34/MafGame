@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Type',
     'Unit',
     'Activities',
+    'Store',
 ]
 
 MIDDLEWARE = [

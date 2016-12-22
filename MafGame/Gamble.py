@@ -1,7 +1,6 @@
 class Gamble:
     pass
 
-
 def gambling():
     pass
 

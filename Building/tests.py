@@ -14,4 +14,4 @@ class BuildingTestCase(TestCase):
     def test_building_buy(self):
         b = building.objects.get(name="fabriek")
         p = player.objects.get(name="Mike")
-        self.assertEqual(b.buy(p), 1)
+        self.assertEqual(b.buy(p), 0)

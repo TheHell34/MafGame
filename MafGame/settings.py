@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Player',
     'Type',
     'Unit',
+    'Activities',
 ]
 
 MIDDLEWARE = [

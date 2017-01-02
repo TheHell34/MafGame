@@ -10,3 +10,6 @@ class player(models.Model):
     health = models.IntegerField()
     armor = models.IntegerField()
     registered = models.DateTimeField('auto_now_add=True')
+
+    def __str__(self):
+        return self.name

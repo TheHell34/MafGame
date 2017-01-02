@@ -16,6 +16,7 @@ class building(models.Model):
     def buy(self, player):
         player.money -= self.cost
         self.register_building(player)
+        player.xp += self.cost
         player.save()
 
     def register_building(self, p):
@@ -38,6 +39,9 @@ class building(models.Model):
             pb.save()
         else:
             return False
+
+    def __str__(self):
+        return self.name
 
 
 

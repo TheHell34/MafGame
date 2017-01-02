@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.conf import settings
 
 # Create your tests here.
+from django.utils import timezone
+
 from Building.models import building
 from Player.models import player
 from Building.models import player_building
@@ -10,13 +12,14 @@ from Building.models import player_building
 class BuildingTestCase(TestCase):
     def setUp(self):
         building.objects.create(name="fabriek", perhour=1, cost=100, multiplier=1.1, requiredxp=0)
-        player.objects.create(name="Mike", password="Kaas", money=1000, xp=0, health=100, armor=100, registered="2012-09-28T16:41:12.9976565")
+        player.objects.create(name="Mike", password="Kaas", money=1000, xp=0, health=100, armor=100, registered=timezone.now())
 
     def test_building_buy(self):
         b = building.objects.get(name="fabriek")
         p = player.objects.get(name="Mike")
         b.buy(p)
         self.assertEqual(p.money, 900)
+        self.assertEqual(p.xp, b.cost)
 
     def test_generate_money(self):
         b = building.objects.get(name="fabriek")

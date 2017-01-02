@@ -3,8 +3,6 @@ from Player.models import player
 
 # Create your models here.
 
-
-
 class building(models.Model):
     building_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -12,17 +10,6 @@ class building(models.Model):
     cost = models.BigIntegerField()
     multiplier = models.FloatField()
     requiredxp = models.BigIntegerField()
-
-    def buy(self, player):
-        player.money -= self.cost
-        self.register_building(player)
-        player.xp += self.cost
-        player.save()
-
-    def register_building(self, p):
-        player_building.objects.create(player_id=p, building_id=self, level=1, perhour=self.perhour, cost=self.cost * self.multiplier)
-        pb = player_building.objects.get(player_id=p, building_id=self)
-        pb.save()
 
     def generate_money(self, player):
         player.money += self.perhour
@@ -42,8 +29,6 @@ class building(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 class player_building(models.Model):
     id = models.AutoField(primary_key=True)

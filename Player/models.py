@@ -28,6 +28,7 @@ class player(models.Model):
         for b in buildings:
             Building.models.player_building.objects.create(player_id=p, building_id=b, level=0, perhour=0, cost=b.cost)
 
+    #for testing only
     def give_money(self, amount):
         self.money += amount
         self.save()

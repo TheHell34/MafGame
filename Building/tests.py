@@ -48,3 +48,4 @@ class BuildingTestCase(TestCase):
         pb = player_building.objects.get(player_id=p.player_id, building_id=b.building_id)
         self.assertEqual(p.money, 390)
         self.assertEqual(pb.cost, 160)
+        self.assertEqual(pb.level, 5)

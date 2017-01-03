@@ -16,3 +16,4 @@ class PlayerTestCase(TestCase):
         p = player.objects.get(name="Mike")
         pu = player_Unit.objects.all().filter(player_id=p.player_id).count()
         self.assertEqual(pu, 3)
+        self.assertEqual(p.money, 100)

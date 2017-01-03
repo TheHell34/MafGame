@@ -10,14 +10,27 @@ class Unit(models.Model):
     cost = models.BigIntegerField()
     carry = models.BigIntegerField()
 
-    def attack(self):
-        pass
+    def buy(self, player, amount):
+        pu = player_Unit.objects.get(player_id=player, unit_id=self)
+        if player.money >= (self.cost * amount):
+            player.money -= (self.cost * amount)
+            pu.amount += amount
+            player.save()
+            pu.save()
 
-    def defend(self):
-        pass
-
-    def calc(self):
-        pass
+    def attack(self, attacker, defender):
+        attack_power = attacker.armor
+        defend_armor = defender.armor
+        attacker_units = player_Unit.objects.all().filter(player_id=attacker)
+        defender_units = player_Unit.objects.all().filter(player_id=defender)
+        for unit in attacker_units:
+            attack_power += (unit.unit_id.dmg * unit.amount)
+        for unit in defender_units:
+            defend_armor += (unit.unit_id.armor * unit.amount)
+        if attack_power > defend_armor:
+            print("attacker wins")
+        else:
+            print("defender wins")
 
     def __str__(self):
         return self.name

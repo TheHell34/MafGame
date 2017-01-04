@@ -15,14 +15,17 @@ class ActivityTestCase(TestCase):
     def test_pay_cost(self):
         p = player.objects.get(name="Mike")
         a = activity.objects.get(name="RPS")
-        self.assertEqual(a.pay_cost(p), 50)
+        a.pay_cost(p)
+        self.assertEqual(p.money, 50)
 
-    def test_give_reward(self):
+    def test_receive_reward(self):
         p = player.objects.get(name="Mike")
-        y = activity.objects.get(name="RPS")
-        self.assertEqual(y.receive_reward(p), 150)
+        a = activity.objects.get(name="RPS")
+        a.receive_reward(p)
+        self.assertEqual(p.money, 200)
 
     def test_victory(self):
         p = player.objects.get(name="Mike")
         a = activity.objects.get(name="RPS")
-        self.assertEqual(a.victory(p), 250)
+        a.victory(p)
+        self.assertEqual(p.money, 200)

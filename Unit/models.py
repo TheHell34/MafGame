@@ -31,10 +31,20 @@ class Unit(models.Model):
         for unit in defender_units:
             defend_armor += (unit.unit_id.armor * unit.amount)
         if attack_power > defend_armor:
-            money = defe
+            if defender.money > carry:
+                attacker.money += carry
+                defender.money -= carry
+            else:
+                attacker.money += defender.money
+                defender.money = 0
+            attacker.save()
+            defender.save()
             return "attacker wins"
 
         else:
+            for unit in attacker_units:
+                unit.amount = 0
+                unit.save()
             return "defender wins"
 
     def __str__(self):

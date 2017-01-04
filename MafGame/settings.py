@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Unit',
     'Activities',
     'Store',
+    'Gang',
 ]
 
 MIDDLEWARE = [

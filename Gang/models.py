@@ -77,7 +77,7 @@ class gang(models.Model):
 
 class gang_items(models.Model):
     player_id = models.ForeignKey(player)
-    weapon_id = models.ForgeinKey(gang)
+    # weapon_id = models.ForeignKey(gang)
     member_id = models.ForeignKey(gang)
     member_level = models.IntegerField()
     weapon_level = models.IntegerField()

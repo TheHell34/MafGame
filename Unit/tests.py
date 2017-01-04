@@ -10,6 +10,7 @@ class PlayerTestCase(TestCase):
         Unit.objects.create(name="gf", dmg=50, armor=50, cost=100, carry=200)
         Unit.objects.create(name="maf", dmg=10, armor=10, cost=10, carry=20)
         Unit.objects.create(name="sniper", dmg=100, armor=0, cost=50, carry=0)
+        Unit.objects.create(name="bodyguard", dmg=0, armor=100, cost=50, carry=0)
         player.register("Mike", "ditwachtwoordisgeheim")
         player.register("Dominic", "ditwachtwoordisgeheim")
 
@@ -25,6 +26,13 @@ class PlayerTestCase(TestCase):
     def test_attack(self):
         p1 = player.objects.get(name="Mike")
         p2 = player.objects.get(name="Dominic")
+        gf = Unit.objects.get(name="gf")
+        sniper = Unit.objects.get(name="sniper")
+        p1.give_money(9900)
+        p2.give_money(9900)
+        sniper.buy(p2, 5)
+        gf.buy(p1, 10)
+        Unit.attack(p1, p2)
         pass
 
     def test_defend(self):

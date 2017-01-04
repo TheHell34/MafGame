@@ -16,3 +16,6 @@ def onlose():
 def ondraw():
     pass
 
+def update_player():
+    pass
+

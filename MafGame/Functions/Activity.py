@@ -1,5 +1,4 @@
 from django.db import models
-from Player.models import player
 
 
 def receive_reward(self, player):
@@ -7,14 +6,12 @@ def receive_reward(self, player):
     player.xp += self.reward
     player.save()
 
-
 def pay_cost(self, player):
     if player.money >= self.cost:
         player.money -= self.cost
         player.save()
     else:
         return False
-
 
 def victory(self, player):
     receive_reward(self, player)

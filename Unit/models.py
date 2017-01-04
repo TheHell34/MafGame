@@ -18,19 +18,24 @@ class Unit(models.Model):
             player.save()
             pu.save()
 
-    def attack(self, attacker, defender):
+    @staticmethod
+    def attack(attacker, defender):
         attack_power = attacker.armor
         defend_armor = defender.armor
+        carry = 0
         attacker_units = player_Unit.objects.all().filter(player_id=attacker)
         defender_units = player_Unit.objects.all().filter(player_id=defender)
         for unit in attacker_units:
             attack_power += (unit.unit_id.dmg * unit.amount)
+            carry += (unit.unit_id.carry * unit.amount)
         for unit in defender_units:
             defend_armor += (unit.unit_id.armor * unit.amount)
         if attack_power > defend_armor:
-            print("attacker wins")
+            money = defe
+            return "attacker wins"
+
         else:
-            print("defender wins")
+            return "defender wins"
 
     def __str__(self):
         return self.name

@@ -1,19 +1,16 @@
 from django.test import TestCase
-from django.conf import settings
-
 # Create your tests here.
-from django.utils import timezone
 
-from Building.models import building, player_building
+from Building.models import building, player_building, generate_money
 from Player.models import player
 
 
 class BuildingTestCase(TestCase):
     def setUp(self):
-        building.objects.create(name="fabriek1", perhour=1, cost=100, multiplier=1.1, requiredxp=0)
-        building.objects.create(name="fabriek2", perhour=10, cost=1000, multiplier=1.2, requiredxp=0)
-        building.objects.create(name="fabriek3", perhour=100, cost=10000, multiplier=1.3, requiredxp=0)
-        building.objects.create(name="fabriek4", perhour=1000, cost=100000, multiplier=1.4, requiredxp=0)
+        building.objects.create(name="fabriek1", perminute=1, cost=100, multiplier=1.1, requiredxp=0)
+        building.objects.create(name="fabriek2", perminute=10, cost=1000, multiplier=1.2, requiredxp=0)
+        building.objects.create(name="fabriek3", perminute=100, cost=10000, multiplier=1.3, requiredxp=0)
+        building.objects.create(name="fabriek4", perminute=1000, cost=100000, multiplier=1.4, requiredxp=0)
 
     def test_generate_money(self):
         b = building.objects.all()
@@ -23,8 +20,8 @@ class BuildingTestCase(TestCase):
         for i in b:
             i.upgrade(p)
         self.assertEqual(p.money, 0)
-        for i in b:
-            i.generate_money(p)
+        generate_money()
+        p = player.objects.get(name="Mike2")
         self.assertEqual(p.money, 1111)
 
     def test_upgrade(self):

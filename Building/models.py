@@ -3,17 +3,22 @@ from Player.models import player
 
 # Create your models here.
 
+def generate_money():
+    players = player.objects.all()
+    for p in players:
+        pb = player_building.objects.filter(player_id=p)
+        for building in pb:
+            p.money += building.perminute
+        p.save()
+
+
 class building(models.Model):
     building_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    perhour = models.BigIntegerField()
+    perminute = models.BigIntegerField()
     cost = models.BigIntegerField()
     multiplier = models.FloatField()
     requiredxp = models.BigIntegerField()
-
-    def generate_money(self, player):
-        player.money += self.perhour
-        player.save()
 
     def upgrade(self, player):
         pb = player_building.objects.get(player_id=player, building_id=self)
@@ -21,7 +26,7 @@ class building(models.Model):
             player.money -= pb.cost
             pb.level += 1
             pb.cost *= self.multiplier
-            pb.perhour += self.perhour
+            pb.perminute += self.perminute
             player.save()
             pb.save()
         else:
@@ -35,7 +40,7 @@ class player_building(models.Model):
     player_id = models.ForeignKey(player)
     building_id = models.ForeignKey(building)
     level = models.IntegerField()
-    perhour = models.BigIntegerField()
+    perminute = models.BigIntegerField()
     cost = models.BigIntegerField()
 
 

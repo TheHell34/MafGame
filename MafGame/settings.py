@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,15 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    'kombu.transport.django',
     'MafGame',
     'Building',
     'Item',
     'Player',
-    'Type',
     'Unit',
     'Activities',
     'Store',
-    'Gang',
 ]
 
 MIDDLEWARE = [
@@ -87,13 +86,17 @@ WSGI_APPLICATION = 'MafGame.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mafgame',
-        'USER': 'Dev',
-        'PASSWORD': 'Dev123.',
-        'HOST': 'mikenachtigaal.nl',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'mafgame',
+    #     'USER': 'Dev',
+    #     'PASSWORD': 'Dev123.',
+    #     'HOST': 'mikenachtigaal.nl',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -134,3 +137,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'django://'
+
+# The default Django db scheduler
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"

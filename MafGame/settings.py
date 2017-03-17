@@ -27,7 +27,7 @@ SECRET_KEY = '361+#7wz*#)d&&n7#5c94_dk)uo26$u)c9+_t1#0k_j%f!+4@n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,11 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MafGame',
     'Building',
-    'Item',
     'Player',
     'Unit',
-    'Activities',
-    'Store',
+
 ]
 
 MIDDLEWARE = [

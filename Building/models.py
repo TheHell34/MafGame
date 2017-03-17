@@ -1,16 +1,8 @@
 from django.db import models
 from Player.models import player
 
+
 # Create your models here.
-
-def generate_money():
-    players = player.objects.all()
-    for p in players:
-        pb = player_building.objects.filter(player_id=p)
-        for building in pb:
-            p.money += building.perminute
-        p.save()
-
 class building(models.Model):
     building_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -34,6 +26,7 @@ class building(models.Model):
     def __str__(self):
         return self.name
 
+
 class player_building(models.Model):
     id = models.AutoField(primary_key=True)
     player_id = models.ForeignKey(player)
@@ -45,8 +38,10 @@ class player_building(models.Model):
     def __str__(self):
         return str(self.player_id.user) + " - " + str(self.building_id.name)
 
-
-
-
-
-
+def generate_money():
+    players = player.objects.all()
+    for p in players:
+        pb = player_building.objects.filter(player_id=p)
+        for building in pb:
+            p.money += building.perminute
+        p.save()

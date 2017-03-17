@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+    <ul class="list-inline">
+        {% for pu in pus %}
+            <li>
+                <div>
+                    <form action="{% url 'Unit:buy' pu.unit_id %}" method="post">
+                        {% csrf_token %}
+                        <p>{{ pu.unit_id }}</p>
+                        <p>current amount: {{ pu.amount }}</p>
+                        <p>Cost: {{ pu.unit_id.cost }}</p>
+                        Amount: <input type="number" name="amount">
+                        <input type="hidden" value="{{ pb.unit_id }}" name="unit_id">
+                        <input type="submit" value="Buy">
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+
+
+
+
+{% endblock %}

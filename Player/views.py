@@ -1,34 +1,30 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 # Create your views here.
+from Player.forms import UserForm
 from Player.models import player
-from Player.forms import MyRegistrationForm
-from django.shortcuts import redirect
-
-
-def player_new(request):
-    if request.method == "POST":
-        form = MyRegistrationForm(request.POST)
-        if form.is_valid():
-            player = form.save(commit=False)
-            print(player.username)
-            print(player.password)
-            player.register(player.name, player.password)
-            return redirect('login')
-    else:
-        form = MyRegistrationForm()
-    return render(request, 'player/player_new.html', {'form': form})
-
-# def login(request):
-#     if request.method == "POST":
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             p = form.save(commit=False)
-#             user = player.objects.get(name=p.name)
-#             return render(request, 'player/view_profile.html', {'user': user})
-#     else:
-#         form = LoginForm()
-#     return render(request, 'player/login.html', {'form': form})
 
 def view_profile(request):
-    return render(request, 'player/view_profile.html', {})
+    return render(request, 'player/profile.html', {'player': player.objects.get(user=request.user)})
+
+def index(request):
+    return render(request, 'player/login.html', {})
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            return render(request, 'player/login.html', {'error_message': 'Invalid login'})
+    return render(request, 'player/login.html', {})
+
+def logout_user(request):
+    logout(request)
+    form = UserForm(request.POST or None)
+    context = {
+        "form": form,
+    }
+    return render(request, 'player/logget_out.html', context)

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Unit(models.Model):
@@ -17,6 +18,8 @@ class Unit(models.Model):
             pu.amount += amount
             player.save()
             pu.save()
+        else:
+            return False
 
     @staticmethod
     def attack(attacker, defender):
@@ -50,8 +53,12 @@ class Unit(models.Model):
     def __str__(self):
         return self.name
 
+
 class player_Unit(models.Model):
     id = models.AutoField(primary_key=True)
     player_id = models.ForeignKey('Player.player')
     unit_id = models.ForeignKey(Unit)
     amount = models.BigIntegerField()
+
+    def __str__(self):
+        return str(self.player_id.user) + " - " + str(self.unit_id.name)

@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='building',
+            name='unit',
             fields=[
                 ('building_id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=255)),

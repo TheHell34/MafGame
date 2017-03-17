@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p>Hi there!</p>
-    <p>It works!</p>
-    {% for building in buildings %}
-        <div>
-            <p>{{building.name}}</p>
-        </div>
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+    <ul class="list-inline">
+        {% for pb in pbs %}
+            <li>
+                <div>
+                    <form action="{% url 'Building:buy' pb.building_id %}" method="post">
+                        {% csrf_token %}
+                        <p>{{ pb.building_id }}</p>
+                        <p>Level: {{ pb.level }}</p>
+                        <p>Per minute: {{ pb.perminute }}</p>
+                        <p>Cost: {{ pb.cost }}</p>
+                        <input type="hidden" value="{{ pb.building_id }}" name="building_id">
+                        <input type="submit" value="Buy">
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+
+
+
+
+{% endblock %}

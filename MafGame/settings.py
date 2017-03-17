@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
-    'kombu.transport.django',
     'MafGame',
     'Building',
     'Item',
@@ -86,17 +84,13 @@ WSGI_APPLICATION = 'MafGame.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mafgame',
+        'USER': 'admin',
+        'PASSWORD': 'Admin1234;',
+        'HOST': '62.131.109.45',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'mafgame',
-    #     'USER': 'Dev',
-    #     'PASSWORD': 'Dev123.',
-    #     'HOST': 'mikenachtigaal.nl',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # }
 }
 
 

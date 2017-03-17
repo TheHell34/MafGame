@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Money</th>
+            <th>Attack</th>
+        </tr>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.user }}</td>
+                <td>{{ player.money}}</td>
+
+                <td>
+                    <form method="post" action="{% url 'Unit:attack' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="defender" value="{{ player.user }}">
+                        {% if player.user.username == user.username %}
+                            <input type="submit" disabled>
+                        {% else %}
+                            <input type="submit">
+                        {% endif %}
+
+                    </form>
+                </td>
+            </tr>
+
+
+        {% endfor %}
+</table>
+
+{% endblock %}

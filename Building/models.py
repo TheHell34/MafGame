@@ -11,7 +11,6 @@ def generate_money():
             p.money += building.perminute
         p.save()
 
-
 class building(models.Model):
     building_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -42,6 +41,9 @@ class player_building(models.Model):
     level = models.IntegerField()
     perminute = models.BigIntegerField()
     cost = models.BigIntegerField()
+
+    def __str__(self):
+        return str(self.player_id.user) + " - " + str(self.building_id.name)
 
 
 

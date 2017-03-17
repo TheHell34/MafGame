@@ -132,9 +132,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import djcelery
-djcelery.setup_loader()
-BROKER_URL = 'django://'
-
 # The default Django db scheduler
-CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+

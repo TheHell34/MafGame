@@ -52,7 +52,7 @@ class UnitTestCase(TestCase):
         sniper.buy(p2, 5)
         gf.buy(p1, 10)
         Unit.attack(p1, p2)
-        self.assertEqual(p1.money, 9750)
+        self.assertEqual(p1.money, 9751)
         self.assertEqual(p2.money, 0)
 
     def test_defend(self):

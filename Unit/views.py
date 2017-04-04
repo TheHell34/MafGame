@@ -23,15 +23,19 @@ def buy(request, unit_id):
     p = player.objects.get(user=User.objects.get(username=request.user))
     u = Unit.objects.get(name=unit_id)
     pu = player_Unit.objects.get(unit_id=u, player_id=p)
-    amount = int(request.POST['amount'])
-    if amount > 0 and amount != None:
-        if pu.unit_id.buy(p, int(request.POST['amount'])) != False:
+    if request.POST['amount']:
+        amount = int(request.POST['amount'])
+        if amount > 0 and amount != None:
+            if pu.unit_id.buy(p, int(request.POST['amount'])) != False:
 
-            result += "Transaction successfull"
+                result += "Transaction successfull"
+            else:
+                result += "Not enough money"
         else:
-            result += "Not enough money"
+            result += "Transaction Failed"
     else:
-        result += "Transaction Failed"
+        result += "Failed"
+
     return redirect('/unit')
 
 def players(request):

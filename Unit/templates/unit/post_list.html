@@ -13,7 +13,7 @@
                         <p>{{ pu.unit_id }}</p>
                         <p>current amount: {{ pu.amount }}</p>
                         <p>Cost: {{ pu.unit_id.cost }}</p>
-                        Amount: <input type="number" name="amount">
+                        Amount: <input type="number" name="amount" value=0>
                         <input type="hidden" value="{{ pb.unit_id }}" name="unit_id">
                         <input type="submit" value="Buy">
                     </form>
